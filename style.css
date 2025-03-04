@@ -31,7 +31,7 @@ main {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 }
-.module {
+.game-grid .module {
     font-size: 4rem;
     font-weight: bold;
     display: flex;
@@ -41,4 +41,15 @@ main {
 
 button {
     width: 100px;
+}
+
+.sidebar {
+    text-align: center;
+}
+
+.sidebar .scores {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
 }
