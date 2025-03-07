@@ -23,15 +23,16 @@ main {
     align-items: center;
 }
 
-.game-grid {
+.game-board {
     background-color: antiquewhite;
     display: grid;
     width: 15rem;
     height: 15rem;
+    margin: 1.5rem;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 }
-.game-grid .module {
+.game-board .spot {
     font-size: 4rem;
     font-weight: bold;
     display: flex;
@@ -41,6 +42,7 @@ main {
 
 button {
     width: 100px;
+    margin: 0.5rem;
 }
 
 .sidebar {
