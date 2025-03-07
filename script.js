@@ -1,11 +1,11 @@
 function newGame() {
+    let spots = document.querySelectorAll('.game-board .spot');
     const  startGame = () => {
-        let spots = document.querySelectorAll('.game-board .spot');
         spots.forEach(e => {
             e.textContent = '*';
         });    
     }
-    return {startGame}
+    return {spots, startGame}
 }
 
 const gameBoard = newGame();
@@ -13,5 +13,10 @@ const gameBoard = newGame();
 const start = document.querySelector('#start');
 start.addEventListener('click', () => {
     gameBoard.startGame();
-    
-}); 
+});
+
+gameBoard.spots.forEach(e => {
+    e.addEventListener('click', () => {
+        e.textContent = 'X'
+    })
+});
