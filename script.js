@@ -20,28 +20,41 @@ function playerInfo(playerName) {
     const getScore = () => score
     const sumScore = () => ++score;
 
-    /*let sign;
-    const chooseSign = () => {
-        
-    };*/
+    let sign;
+    const setSign = (value) => sign = value;
+    const getSign = () => sign;
 
 
-    return {getName, getScore, sumScore}
+    return {getName, getScore, sumScore, setSign, getSign}
 }
 
 const gameBoard = newGame();
+let player1;
+let player2 = playerInfo('player 2');
 
 const chooseSign = document.querySelector(".sign");
 
 const start = document.querySelector('#start');
 start.addEventListener('click', () => {
+    player1 = playerInfo(prompt('Insert your name', ));
     chooseSign.style.display = 'block';
-    gameBoard.startGame();
+});
+
+const signBtns = document.querySelectorAll(".signBtn");
+signBtns.forEach(e => {
+    e.addEventListener('click', event => {
+        gameBoard.startGame();
+        chooseSign.style.display = 'none';
+        player1.setSign(event.target.value);
+        if (player1.getSign() = 'X') {
+            player2.setSign('O');
+        } else player2.setSign('x');
+        
+    })
 });
 
 gameBoard.spots.forEach(e => {
     e.addEventListener('click', () => {
-        e.textContent = 'X';
-
+        e.textContent = player1.getSign();
     })
 });
