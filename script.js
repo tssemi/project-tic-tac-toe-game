@@ -31,8 +31,11 @@ function playerInfo(playerName) {
 
 const gameBoard = newGame();
 
+const chooseSign = document.querySelector(".sign");
+
 const start = document.querySelector('#start');
 start.addEventListener('click', () => {
+    chooseSign.style.display = 'block';
     gameBoard.startGame();
 });
 

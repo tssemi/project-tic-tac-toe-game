@@ -26,8 +26,8 @@ main {
 }
 
 .game-board {
-    background-color: antiquewhite;
     color: black;
+    background-color: antiquewhite;
     display: grid;
     width: 15rem;
     height: 15rem;
@@ -41,6 +41,15 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.sign {
+    color: black;
+    text-align: center;
+    background-color: white;
+    padding: 1em;
+    position: relative;
+    display: none;
 }
 
 button {
