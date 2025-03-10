@@ -5,6 +5,8 @@
 }
 
 body {
+    background-color: black;
+    color: white;
     display: grid;
     grid-template-rows: 0.5fr 2fr;
     grid-template-columns: 1.5fr 1fr;
@@ -25,6 +27,7 @@ main {
 
 .game-board {
     background-color: antiquewhite;
+    color: black;
     display: grid;
     width: 15rem;
     height: 15rem;
