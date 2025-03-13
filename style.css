@@ -43,7 +43,7 @@ main {
     justify-content: center;
 }
 
-.sign {
+.sign, .winner {
     color: black;
     text-align: center;
     background-color: white;
