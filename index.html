@@ -11,7 +11,7 @@
         <h1>Tic Tac Toe Game</h1>
     </header>
     <main>
-        <button id="start">New game</button>
+        <button class="new-game">New game</button>
         <div class="game-board">
             <div class="spot 0">X</div>
             <div class="spot 1">X</div>
@@ -22,11 +22,6 @@
             <div class="spot 6">X</div>
             <div class="spot 7">X</div>
             <div class="spot 8">X</div>
-        </div>
-        <div class="sign">
-            <h3>Choose your sign</h3>
-            <button class="signBtn" value="X">X</button>
-            <button class="signBtn" value="O">O</button>
         </div>
     </main>
     <div class="sidebar">
@@ -39,6 +34,16 @@
                 <h4>Player Two</h4>
             </div>
         </div>
+    </div>
+    <div class="sign">
+        <h3>Choose your sign</h3>
+        <button class="signBtn" value="X">X</button>
+        <button class="signBtn" value="O">O</button>
+    </div>
+    <div class="winner">
+        <h3>The winner is...</h3>
+        <div class="player-name"></div>
+        <button class="new-game">Play again</button>
     </div>
     <script src="script.js"></script>
 </body>
