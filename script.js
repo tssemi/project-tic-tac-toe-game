@@ -1,19 +1,14 @@
 function newGame() {
     let spots = document.querySelectorAll('.game-board .spot');
-    const winCombinations = [
-        [spots[0], spots[1], spots[2]],
-        [spots[3], spots[4], spots[5]],
-        [spots[6], spots[7], spots[8]],
-        [spots[0], spots[3], spots[6]],
-        [spots[1], spots[4], spots[7]],
-        [spots[2], spots[5], spots[8]],
-        [spots[0], spots[4], spots[8]],
-        [spots[2], spots[4], spots[6]],
-    ];
+    const getSpots = () => spots;
 
     const startGame = () => {
         spots.forEach(e => e.textContent = '*');    
     };
+
+    const p1turn = () => {
+
+    }
 
     const p2turn = () => {
         let random = '';
@@ -27,26 +22,31 @@ function newGame() {
     }
 
     const check = () => {
-        
+        const winCombinations = [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+            [0,4,8],
+            [2,4,6]
+        ];
+        winCombinations.forEach(e => {
+            
+        });
     };
-    
-    return {spots, startGame, check, p2turn}
+    return {getSpots, startGame, p1turn, p2turn, check}
 }
 
 function playerInfo(playerName) {
     const name = playerName;
     const getName = () => name;
-
-    let score = 0;
-    const getScore = () => score
-    const sumScore = () => ++score;
-
     let sign;
     const setSign = (value) => sign = value;
     const getSign = () => sign;
 
-
-    return {getName, getScore, sumScore, setSign, getSign}
+    return {getName, setSign, getSign}
 }
 
 const gameBoard = newGame();
@@ -54,8 +54,7 @@ let player1;
 let player2 = playerInfo('Player two');
 
 const chooseSign = document.querySelector(".sign");
-
-const start = document.querySelector('#start');
+const start = document.querySelector('.new-game');
 
 start.addEventListener('click', () => {
     player1 = playerInfo(prompt('Insert your name', ));
@@ -77,7 +76,7 @@ signBtns.forEach(e => {
     })
 });
 
-gameBoard.spots.forEach(e => {
+gameBoard.getSpots().forEach(e => {
     e.addEventListener('click', () => {
         if (e.textContent != player1.getSign() && e.textContent != player2.getSign()) {
             e.textContent = player1.getSign();
