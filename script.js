@@ -6,10 +6,6 @@ function newGame() {
         spots.forEach(e => e.textContent = '*');    
     };
 
-    const p1turn = () => {
-
-    }
-
     const p2turn = () => {
         let random = '';
         do {
@@ -32,11 +28,23 @@ function newGame() {
             [0,4,8],
             [2,4,6]
         ];
-        winCombinations.forEach(e => {
-            
+        let bool;
+
+        winCombinations.forEach(ele => {
+            if (ele[0] === ele[1] && ele[1] === ele[2]) {
+                bool = true;
+            } else {
+                bool = false;
+            }
+
         });
+        return bool
     };
-    return {getSpots, startGame, p1turn, p2turn, check}
+
+    const finishGame = () => {
+
+    }
+    return {getSpots, startGame, p2turn, check, finishGame}
 }
 
 function playerInfo(playerName) {
@@ -50,11 +58,12 @@ function playerInfo(playerName) {
 }
 
 const gameBoard = newGame();
-let player1;
-let player2 = playerInfo('Player two');
 
 const chooseSign = document.querySelector(".sign");
 const start = document.querySelector('.new-game');
+
+let player1;
+let player2 = playerInfo('Player two');
 
 start.addEventListener('click', () => {
     player1 = playerInfo(prompt('Insert your name', ));
@@ -80,9 +89,9 @@ gameBoard.getSpots().forEach(e => {
     e.addEventListener('click', () => {
         if (e.textContent != player1.getSign() && e.textContent != player2.getSign()) {
             e.textContent = player1.getSign();
-            gameBoard.check();
+            if (gameBoard.check()) gameBoard.finishGame()
             gameBoard.p2turn();
-            gameBoard.check();
+            if (gameBoard.check()) gameBoard.finishGame()
         }
     })
 });
