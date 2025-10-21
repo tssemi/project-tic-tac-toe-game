@@ -30,13 +30,16 @@ main {
     margin: 1.5rem;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    justify-content: center;
 }
 .game-board .spot {
     font-size: 4rem;
     font-weight: bold;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+}
+.game-board .spot p {
 }
 
 .sign, .winner {

@@ -1,5 +1,6 @@
 function newGame() {
     let spots = document.querySelectorAll('.game-board .spot');
+    
     const getSpots = () => spots;
 
     const startGame = () => {
@@ -28,16 +29,22 @@ function newGame() {
             [0,4,8],
             [2,4,6]
         ];
-        let bool;
-
+        let bool = false;
+        /*
         winCombinations.forEach(ele => {
-            if (ele[0] === ele[1] && ele[1] === ele[2]) {
-                bool = true;
-            } else {
-                bool = false;
+            if (bool === false) {
+                if (spots[ele[0]].textContent === spots[ele[1]].textContent && spots[ele[1]].textContent === spots[ele[2]].textContent) {
+                    bool = true;
+                } 
             }
+        });*/
 
-        });
+        for (const ele of winCombinations) {
+            if (spots[ele[0]].textContent === spots[ele[1]].textContent && spots[ele[1]].textContent === spots[ele[2]].textContent) {
+                bool = true;
+            }    
+        }
+
         return bool
     };
 
@@ -89,6 +96,7 @@ gameBoard.getSpots().forEach(e => {
     e.addEventListener('click', () => {
         if (e.textContent != player1.getSign() && e.textContent != player2.getSign()) {
             e.textContent = player1.getSign();
+            
             if (gameBoard.check()) gameBoard.finishGame()
             gameBoard.p2turn();
             if (gameBoard.check()) gameBoard.finishGame()
