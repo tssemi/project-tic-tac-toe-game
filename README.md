@@ -1,7 +1,4 @@
-# project-tic-tac-toe-game
+# Project: Tic Tac Toe
+"The Odin Project" | JAVASCRIPT COURSE 
 
-"The Odin Project"
-
-JAVASCRIPT COURSE | Project Tic Tac Toe Game
-
-Make a Tic Tac Toe game you can play in the browser.
+Create a browser console game program
