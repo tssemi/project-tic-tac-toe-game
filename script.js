@@ -1,18 +1,28 @@
 //Beginning:
-//when the start button is pressed the board must be clean
 //the user will have to put their name so it can be stored
 
 //Console game:
 //make every cell interactive for the user
  function createGame() {
-    let cells = document.querySelectorAll(".cell");
+    let cells = document.querySelectorAll('.cell');
 //every time the user clicks on a space an X sign must appear
     
     cells.forEach(e => {
-    e.addEventListener("click", () => {
-            e.textContent = "X";
+    e.addEventListener('click', () => {
+            e.textContent = 'X';
         })
     });
+//when the start button is pressed the board must be clean
+    const bttnStart = document.querySelector('.bttn');
+    bttnStart.addEventListener('click', () => {
+        console.log('cells')
+        cells.forEach(e => {
+            e.textContent = '';
+        });
+    })
+
+
+    return {cells}
  }
 
  const gameBoard = createGame();
