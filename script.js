@@ -1,24 +1,34 @@
 //Console game:
  function createGame() {
     let cells = document.querySelectorAll('.cell');
+    let count = 0;
+
+//User's turn
     cells.forEach(e => {
     e.addEventListener('click', () => {
         if (e.textContent == ' ') {
             e.textContent = 'X';
-            browsersTurn();
-        };
-
+            count += 1;
+            console.log("player " + count);
+            if (count < 9) browsersTurn();
+        }
         })
     });
-//immediately (for now maybe) after that, an O sign must be shown in a random cell
+//Browser's turn
     const browsersTurn = () => {
         let num = Math.floor(Math.random() * 8 + 1);
         while (cells[num].textContent == 'X' || cells[num].textContent == 'O') {
             num = Math.floor(Math.random() * 8) + 1;
         }
         cells[num].textContent = 'O';
-    }
-//make a function to check when the board is full or someone made a line
+        count += 1;
+        console.log("brow " + count);
+    };
+//Check board
+
+    const checkWinner = () => {
+
+    };
 
 
     const startButton = document.querySelector('.button');
@@ -26,6 +36,7 @@
         cells.forEach(e => {
             e.textContent = ' ';
         });
+        count = 0;
     })
 
 //whoever the user or the browser makes a line wins and the winner must be shown
