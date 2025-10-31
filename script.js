@@ -9,8 +9,8 @@
         if (e.textContent == ' ') {
             e.textContent = 'X';
             count += 1;
-            console.log("player " + count);
             if (count < 9) browsersTurn();
+            checkBoard();
         }
         })
     });
@@ -22,12 +22,29 @@
         }
         cells[num].textContent = 'O';
         count += 1;
-        console.log("brow " + count);
     };
 //Check board
+/*
+lines:
+[0, 1, 2]  [0, 3, 6]  [0, 4, 8]
+[3, 4, 5]  [1, 4, 7]  [6, 4, 2]
+[6, 7, 8]  [2, 5, 8]
+*/
+    const checkBoard = () => {
+        const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], 
+        [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]];
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            const cellA = cells[line[0]].textContent;
+            const cellB = cells[line[1]].textContent;
+            const cellC = cells[line[2]].textContent;
 
-    const checkWinner = () => {
-
+            if (cellA == false || cellB == false || cellC == false) {
+                continue;
+            } else if (cellA == cellB && cellB == cellC) {
+                console.log(lines[i]);
+            };
+        }
     };
 
 
