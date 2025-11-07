@@ -1,20 +1,41 @@
-//Console game:
-const startButton = document.querySelector('.button');
-    startButton.addEventListener('click', () => createGame(0))
+const gameBoard = {
+    player1: {
+        name: '',
+        sign: 'X'
+    },
+    player2: {
+        name: '',
+        sign: 'O'
+    },
+    startGame: createGame(0),
 
+}
+
+const startButton = document.querySelector('.button');
+    startButton.addEventListener('click', () => {
+        gameBoard.player1.name = prompt('Player X: ', );
+        gameBoard.player2.name = prompt('Player O: ', );
+        console.log(gameBoard.player1.name)
+        gameBoard.startGame
+    })
+
+    //Console game
  function createGame(num) {
     let cells = document.querySelectorAll('.cell');
     cells.forEach(e => {
             e.textContent = ' ';
         });
     let count = num;
-
+    
     const cellClicked = (e) => {
         if (e.textContent == ' ') {
             e.textContent = 'X';
             count += 1;
             if (count < 9) browsersTurn();
-            checkBoard();
+            
+            if (checkBoard() == true) {
+                console.log('win')
+            };
         }
     }
 
@@ -51,18 +72,17 @@ lines:
             if (cellA == false || cellB == false || cellC == false) {
                 continue;
             } else if (cellA == cellB && cellB == cellC) {
-                console.log(lines[i]);
                 gameOver();
+                return true
             };
         }
+        return false
     };
 
 //Game Over
     const gameOver = () => {
         let cells = document.querySelectorAll('.cell');
-        cells.forEach(e => {
-            e.removeEventListener('click', () => cellClicked)
-        });
+        cells.forEach(e => e.removeEventListener('click', () => cellClicked));
     }
 
     return {cells}
