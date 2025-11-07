@@ -7,7 +7,7 @@ const gameBoard = {
         name: '',
         sign: 'O'
     },
-    startGame: createGame(0),
+    start: startGame,
 
 }
 
@@ -16,50 +16,39 @@ const startButton = document.querySelector('.button');
         gameBoard.player1.name = prompt('Player X: ', );
         gameBoard.player2.name = prompt('Player O: ', );
         console.log(gameBoard.player1.name)
-        gameBoard.startGame
+        gameBoard.start(0);
     })
 
-    //Console game
- function createGame(num) {
+//Console game
+ function startGame(num) {
     let cells = document.querySelectorAll('.cell');
     cells.forEach(e => {
             e.textContent = ' ';
         });
     let count = num;
-    
-    const cellClicked = (e) => {
-        if (e.textContent == ' ') {
-            e.textContent = 'X';
-            count += 1;
-            if (count < 9) browsersTurn();
-            
-            if (checkBoard() == true) {
-                console.log('win')
-            };
-        }
-    }
 
-//User's turn
     cells.forEach(e => {
     e.addEventListener('click', () => cellClicked(e))
     });
-    
-//Browser's turn
-    const browsersTurn = () => {
-        let num = Math.floor(Math.random() * 8 + 1);
-        while (cells[num].textContent == 'X' || cells[num].textContent == 'O') {
-            num = Math.floor(Math.random() * 8) + 1;
-        }
-        cells[num].textContent = 'O';
-        count += 1;
-    };
+//Player's input
+    function cellClicked(e) {
+        if (count % 2 === 0) {
+            e.textContent = 'X';
+            count++;
+            if (checkBoard() == true) {
+                console.log('X won')
+            };
+            console.log(count)
+        } else {
+            e.textContent = 'O';
+            count++;
+            if (checkBoard() == true) {
+                console.log('O won')
+            };
+            console.log(count)
+        };
+    }
 //Check board
-/*
-lines:
-[0, 1, 2]  [0, 3, 6]  [0, 4, 8]
-[3, 4, 5]  [1, 4, 7]  [6, 4, 2]
-[6, 7, 8]  [2, 5, 8]
-*/
     const checkBoard = () => {
         const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], 
         [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]];
