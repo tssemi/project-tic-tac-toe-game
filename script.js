@@ -1,19 +1,28 @@
 //Console game:
- function createGame() {
-    let cells = document.querySelectorAll('.cell');
-    let count = 0;
+const startButton = document.querySelector('.button');
+    startButton.addEventListener('click', () => createGame(0))
 
-//User's turn
+ function createGame(num) {
+    let cells = document.querySelectorAll('.cell');
     cells.forEach(e => {
-    e.addEventListener('click', () => {
+            e.textContent = ' ';
+        });
+    let count = num;
+
+    const cellClicked = (e) => {
         if (e.textContent == ' ') {
             e.textContent = 'X';
             count += 1;
             if (count < 9) browsersTurn();
             checkBoard();
         }
-        })
+    }
+
+//User's turn
+    cells.forEach(e => {
+    e.addEventListener('click', () => cellClicked(e))
     });
+    
 //Browser's turn
     const browsersTurn = () => {
         let num = Math.floor(Math.random() * 8 + 1);
@@ -43,21 +52,19 @@ lines:
                 continue;
             } else if (cellA == cellB && cellB == cellC) {
                 console.log(lines[i]);
+                gameOver();
             };
         }
     };
 
-
-    const startButton = document.querySelector('.button');
-    startButton.addEventListener('click', () => {
+//Game Over
+    const gameOver = () => {
+        let cells = document.querySelectorAll('.cell');
         cells.forEach(e => {
-            e.textContent = ' ';
+            e.removeEventListener('click', () => cellClicked)
         });
-        count = 0;
-    })
+    }
 
-//whoever the user or the browser makes a line wins and the winner must be shown
     return {cells}
 }
 
-const gameBoard = createGame();
