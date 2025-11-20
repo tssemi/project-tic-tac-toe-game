@@ -5,32 +5,12 @@ let gameBoard = createGame();
 startButton.addEventListener('click', () => {
     gameBoard.players.p1 = prompt('X Player: ', );
     gameBoard.players.p2 = prompt('O Player: ', );
-    gameBoard.game.finishingGame(gameBoard.game.startingGame(0, gameBoard.player1.name, gameBoard.player2.name));
+    gameBoard.initiateGame();
 })
 
 function createGame() {
-    return {
-        players: {p1: '', p2: ''},
+    let count;
 
-
-        initiateGame() {
-            cells.forEach(e => e.textContent = ' ');
-        }
-
-
-    }
-
-}
-
-//Console game
- function startingGame(num, p1, p2) {
-    //const cells = document.querySelectorAll('.cell');
-    let count = num;
-
-    cells.forEach(e => e.textContent = ' ');
-
-    cells.forEach(e => e.addEventListener('click', () => cellClicked(e)));
-//Player's input
     function cellClicked(e) {
         if (e.textContent == false) {
             if (count % 2 === 0) {
@@ -44,12 +24,12 @@ function createGame() {
                 count++;
                 if (count >= 5) {
                     if (checkBoard()[0] == true && checkBoard()[1] == 'O') gameOver(p2);
-                };
-            };    
+                }
+            }
         }
     }
-//Check board
-    const checkBoard = () => {
+
+    function checkBoard() {
         let bool = false;
         const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], 
         [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]];
@@ -63,19 +43,19 @@ function createGame() {
                 continue;
             } else if (cellA == cellB && cellB == cellC) {
                 return [true, cellA];
-                
             };
         }
         return bool;
-    };
-
-    const gameOver = (winner) => {
-        return {winner}
     }
 
-    return {gameOver}
-}
+    return {
+        players: {p1: '', p2: ''},
 
-function finishingGame(winner) {
-    console.log('winner ' + winner);
+        initiateGame() {
+            cells.forEach(e => e.textContent = ' ');
+            count = 0;
+            cells.forEach(e => e.addEventListener('click', () => cellClicked(e)));
+        }
+
+    }
 }
