@@ -36,3 +36,9 @@ main {
     background-color: black;
     padding: 20px;
 }
+
+.winnerTag {
+    text-align: center;
+    font-size: 30px;
+    margin: 1em;
+}
