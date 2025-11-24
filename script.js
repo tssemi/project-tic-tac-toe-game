@@ -1,15 +1,28 @@
+const board = document.querySelector('.game-board');
+
 const cells = document.querySelectorAll('.cell');
 const startButton = document.querySelector('.button');
-let gameBoard = createGame();
+const winnerTag = document.querySelector('.winner-tag');
+const gameBoard = createGame();
 
 startButton.addEventListener('click', () => {
+    startButton.textContent = 'Restart Game';
     gameBoard.players.p1 = prompt('X Player: ', );
     gameBoard.players.p2 = prompt('O Player: ', );
+
+    cells.forEach(e => e.addEventListener('click', () => gameBoard.cellClicked(e)));
+
     gameBoard.initiateGame();
 })
 
+
 function createGame() {
     let count;
+
+    function initiateGame() {
+        cells.forEach(e => e.textContent = ' ');
+        count = 0;
+    }
 
     function cellClicked(e) {
         if (e.textContent == false) {
@@ -17,13 +30,13 @@ function createGame() {
                 e.textContent = 'X';
                 count++;
                 if (count >= 5) {
-                    if (checkBoard()[0] == true && checkBoard()[1] == 'X') gameOver(p1);
-                };
+                    if (checkBoard()[0] == true && checkBoard()[1] == 'X') console.log(gameBoard.gameOver('X'));
+                }
             } else {
                 e.textContent = 'O';
                 count++;
                 if (count >= 5) {
-                    if (checkBoard()[0] == true && checkBoard()[1] == 'O') gameOver(p2);
+                    if (checkBoard()[0] == true && checkBoard()[1] == 'O') console.log(gameBoard.gameOver('O'));
                 }
             }
         }
@@ -48,14 +61,19 @@ function createGame() {
         return bool;
     }
 
+    function gameOver(sign) {
+        winnerTag.lastElementChild.textContent = gameBoard.winner;
+        //cells.forEach(e => e.removeEventListener('click', cellClicked()));
+        return sign == 'X' ? gameBoard.players.p1 : gameBoard.players.p2
+    }
+
     return {
         players: {p1: '', p2: ''},
 
-        initiateGame() {
-            cells.forEach(e => e.textContent = ' ');
-            count = 0;
-            cells.forEach(e => e.addEventListener('click', () => cellClicked(e)));
-        }
+        initiateGame,
 
+        cellClicked,
+
+        gameOver,
     }
 }
