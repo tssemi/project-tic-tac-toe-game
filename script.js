@@ -2,41 +2,40 @@ const board = document.querySelector('.game-board');
 
 const cells = document.querySelectorAll('.cell');
 const startButton = document.querySelector('.button');
-const winnerTag = document.querySelector('.winner-tag');
+const winnerTag = document.querySelector('.winner-tag div:last-of-type');
 const gameBoard = createGame();
 
 startButton.addEventListener('click', () => {
     startButton.textContent = 'Restart Game';
     gameBoard.players.p1 = prompt('X Player: ', );
     gameBoard.players.p2 = prompt('O Player: ', );
-
-    cells.forEach(e => e.addEventListener('click', () => gameBoard.cellClicked(e)));
-
+    
     gameBoard.initiateGame();
 })
 
-
 function createGame() {
     let count;
+    const controller = new AbortController();
 
     function initiateGame() {
         cells.forEach(e => e.textContent = ' ');
+        cells.forEach(e => e.addEventListener('click', () => cellClicked(e), { signal: controller.signal }));
         count = 0;
     }
 
-    function cellClicked(e) {
+    const cellClicked = (e) => {
         if (e.textContent == false) {
             if (count % 2 === 0) {
                 e.textContent = 'X';
                 count++;
                 if (count >= 5) {
-                    if (checkBoard()[0] == true && checkBoard()[1] == 'X') console.log(gameBoard.gameOver('X'));
+                    if (checkBoard()[0] == true && checkBoard()[1] == 'X') gameOver('X');
                 }
             } else {
                 e.textContent = 'O';
                 count++;
                 if (count >= 5) {
-                    if (checkBoard()[0] == true && checkBoard()[1] == 'O') console.log(gameBoard.gameOver('O'));
+                    if (checkBoard()[0] == true && checkBoard()[1] == 'O') gameOver('O');
                 }
             }
         }
@@ -62,9 +61,12 @@ function createGame() {
     }
 
     function gameOver(sign) {
-        winnerTag.lastElementChild.textContent = gameBoard.winner;
-        //cells.forEach(e => e.removeEventListener('click', cellClicked()));
-        return sign == 'X' ? gameBoard.players.p1 : gameBoard.players.p2
+        cells.forEach(e => {
+            if (e.textContent == false) {
+                controller.abort();  
+            }
+        });
+        winnerTag.textContent = sign == 'X' ? gameBoard.players.p1 : gameBoard.players.p2;
     }
 
     return {
@@ -73,7 +75,5 @@ function createGame() {
         initiateGame,
 
         cellClicked,
-
-        gameOver,
     }
 }
