@@ -15,12 +15,14 @@ startButton.addEventListener('click', () => {
 
 function createGame() {
     let count;
-    const controller = new AbortController();
+    let controller;
 
     function initiateGame() {
+        controller = new AbortController();
         cells.forEach(e => e.textContent = ' ');
         cells.forEach(e => e.addEventListener('click', () => cellClicked(e), { signal: controller.signal }));
         count = 0;
+        winnerTag.textContent = '';
     }
 
     const cellClicked = (e) => {
@@ -61,11 +63,7 @@ function createGame() {
     }
 
     function gameOver(sign) {
-        cells.forEach(e => {
-            if (e.textContent == false) {
-                controller.abort();  
-            }
-        });
+        cells.forEach(e => controller.abort());
         winnerTag.textContent = sign == 'X' ? gameBoard.players.p1 : gameBoard.players.p2;
     }
 
