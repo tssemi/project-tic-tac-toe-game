@@ -1,11 +1,10 @@
-const board = document.querySelector('.game-board');
-
 const cells = document.querySelectorAll('.cell');
-const startButton = document.querySelector('.button');
 const winnerTag = document.querySelector('.winner-tag');
+
 winnerTag.style.display = 'none';
 
 const gameBoard = createGame();
+const startButton = document.querySelector('.button');
 
 startButton.addEventListener('click', () => {
     startButton.textContent = 'Restart Game';
@@ -52,6 +51,7 @@ function createGame() {
         let bool = false;
         const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], 
         [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]];
+
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i];
             const cellA = cells[line[0]].textContent;
