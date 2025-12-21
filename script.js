@@ -2,7 +2,9 @@ const board = document.querySelector('.game-board');
 
 const cells = document.querySelectorAll('.cell');
 const startButton = document.querySelector('.button');
-const winnerTag = document.querySelector('.winner-tag div:last-of-type');
+const winnerTag = document.querySelector('.winner-tag');
+winnerTag.style.display = 'none';
+
 const gameBoard = createGame();
 
 startButton.addEventListener('click', () => {
@@ -18,11 +20,14 @@ function createGame() {
     let controller;
 
     function initiateGame() {
+        winnerTag.style.display = 'none';
+
         controller = new AbortController();
+
         cells.forEach(e => e.textContent = ' ');
         cells.forEach(e => e.addEventListener('click', () => cellClicked(e), { signal: controller.signal }));
+        
         count = 0;
-        winnerTag.textContent = '';
     }
 
     const cellClicked = (e) => {
@@ -63,15 +68,16 @@ function createGame() {
     }
 
     function gameOver(sign) {
+        winnerTag.style.display = 'block';
+
         cells.forEach(e => controller.abort());
-        winnerTag.textContent = sign == 'X' ? gameBoard.players.p1 : gameBoard.players.p2;
+        
+        winnerTag.lastElementChild.textContent = sign == 'X' ? gameBoard.players.p1 : gameBoard.players.p2;
     }
 
     return {
         players: {p1: '', p2: ''},
 
         initiateGame,
-
-        cellClicked,
     }
 }
